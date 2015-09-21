@@ -27,16 +27,22 @@ A JavaScript implementation of Key Management Service (KMS) for current web brow
 
 ## Installing ##
 
-To install the latest from the repostiry:
+To install the latest from [NPM](https://npmjs.com/):
+
+```
+  npm install node-kms
+```
+
+Or to install a specific release:
+
+```
+  npm install node-kms@0.3.0
+```
+
+Alternatively, the latest unpublished code can be installed directly from the repository:
 
 ```
   npm install git+ssh://git@github.com:cisco/node-kms.git
-```
-
-Or to install a specific release from the repository:
-
-```
-  npm install git+ssh://git@github.com:cisco/node-kms.git#0.3.0
 ```
 
 ## Basics ##
@@ -48,6 +54,8 @@ var KMS = require('node-kms');
 ```
 
 This library uses [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) for many operations.
+
+This library supports [Browserify](http://browserify.org/).  To use in a web browser, `require('node-kms')` and bundle with the rest of your app.
 
 ## KeyObjects ##
 
