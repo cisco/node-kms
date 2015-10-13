@@ -129,7 +129,7 @@ function doBrowserify(suffix, steps) {
 
   var stream = browserify({
     entries: require("path").resolve(pkg.main),
-    standalone: "jose"
+    standalone: "kms"
   }).bundle().
   pipe(source(pkg.name + suffix)).
   pipe(buffer());
