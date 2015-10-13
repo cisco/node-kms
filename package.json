@@ -1,6 +1,6 @@
 {
   "name": "node-kms",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A client implementation of the Key Management Service (KMS) for JavaScript -- for both node.js and browser.",
   "main": "lib/index.js",
   "scripts": {
