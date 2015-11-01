@@ -192,7 +192,7 @@ var KARMA_CONFIG = {
   },
   captureTimeout: 600000,
   sauceLabs: {
-    testName: "node-scr"
+    testName: "node-kms"
   },
   files: [TESTS]
 };
