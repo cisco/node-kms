@@ -10,7 +10,6 @@
 .eslintrc
 gulpfile.js
 
-runas
-env/
 coverage/
+dist/
 test/
