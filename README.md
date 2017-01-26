@@ -1,5 +1,7 @@
 # node-kms #
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/cisco/node-kms.svg)](https://greenkeeper.io/)
+
 A JavaScript implementation of Key Management Service (KMS) for current web browsers and node.js-based servers.  The KMS API is described in [[draft-abiggs-saag-key-management-service-02](https://tools.ietf.org/html/draft-abiggs-saag-key-management-service-02)].
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
