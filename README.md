@@ -126,7 +126,7 @@ The KMS.Context holds onto information necessary to wrap Requests and unwrap Res
 To create an empty Context:
 
 ```
-var kmsCtx = new KMS.Contet();
+var kmsCtx = new KMS.Context();
 ```
 
 None of the Context properties are set.
