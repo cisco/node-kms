@@ -4,8 +4,7 @@
  */
  "use strict";
 
-var chai = require("chai"),
-    cloneDeep = require("lodash.clonedeep");
+var chai = require("chai");
 
 var KMS = {
   KeyObject: require("../lib/keyobject"),
@@ -74,11 +73,13 @@ describe("KMS/Context", function() {
       var kmsCtx = new KMS.Context();
       assert.isNull(kmsCtx.ephemeralKey);
 
-      var json = cloneDeep(ephemeral, function(value) {
-        return (value instanceof Date) ?
-               value.toISOString() :
-               undefined;
-      });
+      var json = structuredClone(ephemeral);
+      if (json.createDate instanceof Date) {
+        json.createDate = json.createDate.toISOString();
+      }
+      if (json.expirationDate instanceof Date) {
+        json.expirationDate = json.expirationDate.toISOString();
+      }
       var keyobj = new KMS.KeyObject(json);
       kmsCtx.ephemeralKey = json;
       assert.deepEqual(kmsCtx.ephemeralKey, keyobj);

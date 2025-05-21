@@ -1,15 +1,15 @@
 # self + revision control
 .npmignore
 .gitignore
-.git
-.hg
-.hgtags
+.git/
+.github/
 
 # build environment
 .editorconfig
-.eslintrc
-gulpfile.js
-
+.eslintrc.js
 coverage/
+.nyc_output/
 dist/
 test/
+webpack.config.js
+webpack.min.config.js
