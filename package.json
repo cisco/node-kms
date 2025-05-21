@@ -4,9 +4,8 @@
   "description": "A client implementation of the Key Management Service (KMS) for JavaScript -- for both node.js and browser.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "yarn test:nodejs",
-    "test:nodejs": "mocha --timeout 600000 ./test/**/*-test.js",
-    "test:coverage": "nyc --reporter=lcov --reporter=text mocha --timeout 600000 ./test/**/*-test.js",
+    "test": "mocha --timeout 600000 ./test/**/*-test.js",
+    "test:coverage": "nyc --reporter=lcov --reporter=text yarn test",
     "test:lint": "eslint lib/**/*.js test/**/*.js",
     "lint": "eslint lib/**/*.js test/**/*.js",
     "clean": "rimraf coverage dist .nyc_output",
