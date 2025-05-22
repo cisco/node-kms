@@ -1,4 +1,4 @@
-# node-kms #
+# node-kms
 
 A JavaScript implementation of Key Management Service (KMS) for current web browsers and node.js-based servers.  The KMS API is described in [[draft-abiggs-saag-key-management-service-02](https://tools.ietf.org/html/draft-abiggs-saag-key-management-service-02)].
 
@@ -7,6 +7,8 @@ A JavaScript implementation of Key Management Service (KMS) for current web brow
 <a name='toc'>
 
 - [Installing](#installing)
+  - [Using NPM](#using-npm)
+  - [Using Yarn](#using-yarn)
 - [Basics](#basics)
 - [KeyObjects](#keyobjects)
   - [Creating](#creating)
@@ -27,6 +29,8 @@ A JavaScript implementation of Key Management Service (KMS) for current web brow
 
 ## Installing ##
 
+### Using NPM
+
 To install the latest from [NPM](https://npmjs.com/):
 
 ```
@@ -36,16 +40,24 @@ To install the latest from [NPM](https://npmjs.com/):
 Or to install a specific release:
 
 ```
-  npm install node-kms@0.3.0
+  npm install node-kms@0.5.0
 ```
 
-Alternatively, the latest unpublished code can be installed directly from the repository:
+### Using Yarn
+
+To install the latest from [NPM](https://npmjs.com/) using Yarn:
 
 ```
-  npm install git+ssh://git@github.com:cisco/node-kms.git
+  yarn add node-kms
 ```
 
-## Basics ##
+Or to install a specific release:
+
+```
+  yarn add node-kms@0.5.0
+```
+
+## Basics
 
 Require the library as normal:
 
@@ -57,11 +69,11 @@ This library uses [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaSc
 
 This library supports [Browserify](http://browserify.org/).  To use in a web browser, `require('node-kms')` and bundle with the rest of your app.
 
-## KeyObjects ##
+## KeyObjects
 
 A KMS KeyObject wraps a JSON Web Key (JWK) to provide more semantics: a URI to locate it; the creating user and client; the date/time of when a key is created, bound, and/or expires; and the owning resource (once bound).
 
-### Creating ###
+### Creating
 
 To create an empty KeyObject:
 
@@ -80,7 +92,7 @@ Alternatively, to create a KeyObject from a JSON or POJO representation:
 var keyobj = new.KeyObject(input);
 ```
 
-### Importing/Exporting ###
+### Importing/Exporting
 
 **NOTE**: The JSON representation includes all properties for a KeyObject, including the full JWK (if present).  This can expose secret key material if not carefully handled; do not save to durable storage without protecting it (e.g., encrypting to a JWE).
 
@@ -102,7 +114,7 @@ To export a KeyObject to a JSON object:
 var output = keyobj.toJSON();
 ```
 
-### Obtaining a `node-jose` Key ###
+### Obtaining a `node-jose` Key
 
 To convert the `jwk` property of a KeyObject to a `node-jose` Key (to use for encryption or signatures):
 
@@ -117,11 +129,11 @@ keyobj.asKey().
 
 If `jwk` is not set on the KeyObject, the returned Promise is rejected.
 
-## Contexts ##
+## Contexts
 
 The KMS.Context holds onto information necessary to wrap Requests and unwrap Responses.
 
-### Creating and Initializing ###
+### Creating and Initializing
 
 To create an empty Context:
 
@@ -150,7 +162,7 @@ kmsCtx.serverInfo = {
 };
 ```
 
-### Generating an Ephemeral EC Key ###
+### Generating an Ephemeral EC Key
 
 To create a KeyObject representing the local ECDH key:
 
@@ -162,7 +174,7 @@ kmsCtx.createECDHKey().
     })
 ```
 
-### Deriving an Ephemeral Shared Key ###
+### Deriving an Ephemeral Shared Key
 
 To derive an ephemeral shared key -- such as the result of the ECDHE handshake:
 
@@ -175,7 +187,7 @@ kmsCrx.deriveEphemeralKey(remoteECDH).
     });
 ```
 
-## Requests ##
+## Requests
 
 The KMS.Request embodies a single request from a client to the KMS.
 
@@ -189,7 +201,7 @@ A Request instance has the following (read/write) properties:
 
 When a new `body` is set, the previous `requestId`, `method`, and `uri` are remembered, overwriting any new values that might have been in the provided JSON.
 
-### Creating ###
+### Creating
 
 To create an empty request:
 
@@ -204,7 +216,7 @@ To create a request starting with a constructed body:
 var request = new KMS.Request(input);
 ```
 
-### Wrapping ###
+### Wrapping
 
 To wrap (encrypt) the Request into a JWE for transmitting to a KMS server, using an ephemeral shared key:
 
@@ -218,7 +230,7 @@ request.wrap(kmsCtx).
     });
 ```
 
-## Responses ##
+## Responses
 
 The KMS.Response embodies a single response to a client from the KMS.
 
@@ -230,7 +242,7 @@ A Response instance has the following (read/write) properties:
 * `reason` -- the string reason (if any)
 * `wrapped` -- the protected (encrypted or signed) `body`
 
-### Creating ###
+### Creating
 
 To create an empty KMS.Response:
 
@@ -245,7 +257,7 @@ To creat a KMS.Response with a received wrapped body:
 var response = new KMS.Response(input);
 ```
 
-### Unwrapping ###
+### Unwrapping
 
 To unwrap a response into the plaintext body:
 

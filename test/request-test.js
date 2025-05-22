@@ -5,8 +5,6 @@
  "use strict";
 
 var chai = require("chai"),
-    clone = require("lodash.clone"),
-    omit = require("lodash.omit"),
     jose = require("node-jose");
 
 var KMS = {
@@ -159,9 +157,10 @@ describe("KMS/Request", function() {
     var kmsCtx;
     before(function() {
       kmsCtx = new KMS.Context();
-      kmsCtx.clientInfo = omit(config.clientInfo, "key");
+      var { key, ...clientInfoWithoutKey } = config.clientInfo;
+      kmsCtx.clientInfo = clientInfoWithoutKey;
       kmsCtx.serverInfo = {
-        key: clone(config.serverInfo.cert)
+        key: {...(config.serverInfo.cert)}
       };
       kmsCtx.ephemeralKey = config.sharedKey;
     });
@@ -228,9 +227,10 @@ describe("KMS/Request", function() {
     });
     it("wraps with ephemeral key", function() {
       var kmsCtx = new KMS.Context();
-      kmsCtx.clientInfo = omit(config.clientInfo, "key");
+      var { key, ...clientInfoWithoutKey } = config.clientInfo;
+      kmsCtx.clientInfo = clientInfoWithoutKey;
       kmsCtx.serverInfo = {
-        key: clone(config.serverInfo.cert)
+        key: {...(config.serverInfo.cert)}
       };
       kmsCtx.ephemeralKey = config.sharedKey;
 
@@ -274,9 +274,10 @@ describe("KMS/Request", function() {
     it("wraps with a body-specified requestId", function() {
       var kmsCtx = new KMS.Context(),
           requestId = kmsCtx.requestId();
-      kmsCtx.clientInfo = omit(config.clientInfo, "key");
+      var { key, ...clientInfoWithoutKey } = config.clientInfo;
+      kmsCtx.clientInfo = clientInfoWithoutKey;
       kmsCtx.serverInfo = {
-        key: clone(config.serverInfo.cert)
+        key: {...(config.serverInfo.cert)}
       };
       kmsCtx.ephemeralKey = config.sharedKey;
 
@@ -322,9 +323,10 @@ describe("KMS/Request", function() {
     it("wraps with an explicit requestId", function() {
       var kmsCtx = new KMS.Context(),
           requestId = kmsCtx.requestId();
-      kmsCtx.clientInfo = omit(config.clientInfo, "key");
+      var { key, ...clientInfoWithoutKey } = config.clientInfo;
+      kmsCtx.clientInfo = clientInfoWithoutKey;
       kmsCtx.serverInfo = {
-        key: clone(config.serverInfo.cert)
+        key: {...(config.serverInfo.cert)}
       };
       kmsCtx.ephemeralKey = config.sharedKey;
 

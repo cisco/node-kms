@@ -5,10 +5,7 @@
  "use strict";
 
 var chai = require("chai"),
-    clone = require("lodash.clone"),
-    omit = require("lodash.omit"),
-    jose = require("node-jose"),
-    uuid = require("uuid").v4;
+    jose = require("node-jose");
 
 var assert = chai.assert;
 
@@ -41,7 +38,7 @@ function signWithKey(key, input) {
     key: key
   };
   input = JSON.stringify(input);
-  input = new Buffer(input, "utf8");
+  input = Buffer.from(input, "utf8");
   var jws = jose.JWS.createSign(opts, signer);
   return jws.final(input);
 }
@@ -53,9 +50,10 @@ describe("KMS/use cases/ECDHE", function() {
 
   before(function() {
     clientCtx = new KMS.Context();
-    clientCtx.clientInfo = omit(config.clientInfo, "key");
+    var {key, ...clientInfoWithoutKey} = config.clientInfo;
+    clientCtx.clientInfo = clientInfoWithoutKey;
     clientCtx.serverInfo = {
-      key: clone(config.serverInfo.cert)
+      key: {...(config.serverInfo.cert)}
     };
 
     serverCtx = new KMS.Context();
@@ -107,7 +105,7 @@ describe("KMS/use cases/ECDHE", function() {
     });
     // create and sign response
     promise = promise.then(function(localEcdhe) {
-      var kid = "/ecdhe/" + uuid();
+      var kid = "/ecdhe/" + crypto.randomUUID();
       var key = localEcdhe.toJSON();
       key.uri = kid;
       var json = {

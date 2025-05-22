@@ -1,5 +1,21 @@
 # Release Notes
 
+<a name="0.5.0"></a>
+## [0.5.0](https://github.com/cisco/node-kms/compare/0.3.2...0.5.0) (2025-05-20)
+
+
+### Breaking Changes
+
+* Upgraded to require Node.js 20.0.0 or later
+* Migrated from Gulp to Yarn for build process
+* Switched to Webpack for bundling
+
+### Build
+
+* Added webpack configuration for both standard and minified builds
+* Added GitHub Actions workflows for continuous integration
+* Updated some dependencies to recent versions
+
 <a name="0.3.2"></a>
 ## [0.3.2](https://github.com/cisco/node-kms/compare/0.3.1...0.3.2) (2016-08-23)
 
@@ -27,6 +43,6 @@
 
 
 <a name="0.3.0"></a>
-# [0.3.0] (2015-09-17)
+## [0.3.0] (2015-09-17)
 
 Initial public release.

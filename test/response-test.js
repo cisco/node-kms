@@ -4,9 +4,7 @@
  */
  "use strict";
 
-var chai = require("chai"),
-    clone = require("lodash.clone"),
-    omit = require("lodash.omit");
+var chai = require("chai");
 
 var KMS = {
   Context: require("../lib/context"),
@@ -47,9 +45,10 @@ describe("KMS/Response", function() {
     var kmsCtx;
     before(function() {
       kmsCtx = new KMS.Context();
-      kmsCtx.clientInfo = omit(config.clientInfo, "key");
+      var { key, ...clientInfoWithoutKey } = config.clientInfo;
+      kmsCtx.clientInfo = clientInfoWithoutKey;
       kmsCtx.serverInfo = {
-        key: clone(config.serverInfo.cert)
+        key: {...(config.serverInfo.cert)}
       };
       kmsCtx.ephemeralKey = config.sharedKey;
     });
