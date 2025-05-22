@@ -4,19 +4,16 @@
   "description": "A client implementation of the Key Management Service (KMS) for JavaScript -- for both node.js and browser.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha --timeout 600000 ./test/**/*-test.js",
-    "test:coverage": "nyc --reporter=lcov --reporter=text yarn test",
+    "test": "nyc --include='lib/**/*' --reporter=lcov --reporter=text yarn test:module",
+    "test:module": "mocha --timeout 600000 ./test/**/*-test.js",
     "test:lint": "eslint lib/**/*.js test/**/*.js",
     "lint": "eslint lib/**/*.js test/**/*.js",
-    "clean": "rimraf coverage dist .nyc_output",
-    "build": "webpack",
-    "build:min": "webpack --config webpack.min.config.js",
-    "build:all": "yarn clean && yarn build && yarn build:min",
+    "clean": "rimraf coverage .nyc_output",
     "doc": "doctoc README.md",
     "prepublishOnly": "yarn test && yarn lint && yarn build:all"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=10"
   },
   "repository": {
     "type": "git",
@@ -41,8 +38,10 @@
     "eslint": "^8.0.0",
     "mocha": "^2.1.0",
     "nyc": "^17.1.0",
-    "rimraf": "^6.0.1",
-    "webpack": "^5.99.9",
-    "webpack-cli": "^6.0.1"
-  }
+    "rimraf": "^6.0.1"
+  },
+  "packageManager": "yarn@4.9.1",
+  "files": [
+    "./lib/"
+  ]
 }
